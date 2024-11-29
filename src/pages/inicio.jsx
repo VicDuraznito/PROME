@@ -48,17 +48,19 @@ const Inicio = () => {
       <div className="relative w-full h-full py-10">
         {images.map((img, index) => (
           <motion.img
-            key={index}
-            src={img}
-            alt={`slide-${index}`}
-            className="absolute inset-0 w-full h-full object-cover"
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: index === currentIndex ? 1 : 0,
-              transition: { duration: 1 },
-            }}
-            exit={{ opacity: 0 }}
-          />
+          key={index}
+          src={img}
+          alt={`slide-${index}`}
+          className="absolute inset-0 w-full h-full object-cover"
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: index === currentIndex ? 1 : 0,
+            transition: { duration: 1 },
+          }}
+          exit={{ opacity: 0 }}
+        />
+        
+          
         ))}
 
         {/* Dots de navegación */}
