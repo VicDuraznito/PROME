@@ -22,12 +22,16 @@ const Footer = () => {
           {/* Columna izquierda */}
           <div className="flex flex-col  space-y-6 flex-1">
             <div className="flex items-center">
-              <p className="text-lg font-semibold">Colegio Promedac</p>
+            <Link to="/contacto" className="text-lg font-semibold hover:underline hover:text-gray-300 transition duration-200 ease-in-out">
+                Contactanos
+              </Link>
             </div>
 
             {/* Información de contacto */}
             <div className="flex items-center space-x-4 mt-6">
               <img src={phone} alt="phone" className="h-5 w-auto mr-4" />
+              <p>618 818 05 11</p>
+              <img src={wha} alt="whatsapp" className="h-5 w-auto mr-4" />
               <p>618 818 05 11</p>
             </div>
             <div className="flex items-center space-x-4">
@@ -46,7 +50,7 @@ const Footer = () => {
               </a>
             </div>
             <div className="mt-4 text-xs">
-              <p>© 2024 Colegio Promedac — Cartagena 116, Guadalupe, 34220 Durango, Dgo. — Teléfono (618) 818 0511</p>
+              <p>© 2024 Colegio Promedac</p>
             </div>
           </div>
 
@@ -55,6 +59,7 @@ const Footer = () => {
             <div className="flex items-center">
               <p className="text-lg font-semibold">¡Síguenos en nuestras redes!</p>
             </div>
+            
 
             {/* Íconos de redes sociales */}
             <div className="flex space-x-4 mt-2">
@@ -83,14 +88,10 @@ const Footer = () => {
                 <img src={face} alt="Facebook" className="h-6 w-6" />
               </a>
             </div>
-            <div>
-              <Link to="/contacto" className="text-lg font-semibold hover:underline hover:text-gray-300 transition duration-200 ease-in-out">
-                Contactanos
-              </Link>
-            </div>
-            <div className="flex items-center space-x-2 mt-6">
-              <img src={wha} alt="whatsapp" className="h-5 w-auto mr-4" />
-              <p>618 818 05 11</p>
+            
+            
+            <div className="mt-4 text-base">
+              <p>Aviso de privacidad</p>
             </div>
           </div>
         </div>

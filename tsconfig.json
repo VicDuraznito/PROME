@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "jsx": "react",  // Mantén solo una clave "jsx"
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*", "dist/api/contacto.js", "createAdmin.js"]
+}

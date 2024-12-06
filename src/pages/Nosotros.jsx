@@ -36,11 +36,16 @@ const Nosotros = () => {
                 </p>
                 <div className="p-4">
                     <h2 className="text-2xl font-bold mb-4 text-center">Mira nuestro video</h2>
-                    <video controls className="w-full h-auto rounded-lg shadow-lg">
-                        <source src={videoFile} type="video/mp4" />
-                        Tu navegador no soporta la etiqueta de video.
-                    </video>
+                    <div className="relative w-full h-screen overflow-hidden rounded-lg shadow-lg">
+                        <video controls className="absolute top-0 left-0 w-full h-full object-cover">
+                            <source src={videoFile} type="video/mp4" />
+                            Tu navegador no soporta la etiqueta de video.
+                        </video>
+                    </div>
                 </div>
+
+
+
             </motion.div>
 
             <motion.div

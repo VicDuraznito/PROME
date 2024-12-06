@@ -55,14 +55,14 @@ const Primaria = () => {
         </motion.div>
 
            
-            <section class="w-full bg-white py-20 ">
+            <section className="w-full bg-white py-20 ">
                 
-                <h2 class="text-3xl font-bold text-red-700 mb-4 text-center">
+                <h2 className="text-3xl font-bold text-red-700 mb-4 text-center">
                     Documentacion general para alumnos de nuevo ingreso
                 </h2>
 
                 
-                <ul class="list-disc list-inside py-10 text-black text-lg grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-8 px-6 md:px-20 lg:px-40">
+                <ul className="list-disc list-inside py-10 text-black text-lg grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-8 px-6 md:px-20 lg:px-40">
                     <li>Acta de nacimiento (original y copia).</li>
                     <li>CURP (Dos copias) de alumno (a) y del padre, madre o tutor.</li>
                     <li>Certificado de preescolar (original y copia)</li>
