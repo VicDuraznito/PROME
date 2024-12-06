@@ -1,6 +1,6 @@
 import React from 'react';
 import backgroundImage from '../assets/wallpaper3.jpg';
-import backgroundImage2 from '../assets/wallpaper4.jpg';
+import backgroundImage2 from '../assets/secu3.JPG';
 import { motion } from 'framer-motion';
 
 
@@ -38,7 +38,7 @@ const Secundaria = () => {
         >
             <div className="w-full md:w-1/2 p-4">
                 <img
-                    src={backgroundImage}
+                    src={backgroundImage2}
                     alt="Secundaria"
                     className="rounded-lg shadow-md object-cover w-full h-auto"
                 />

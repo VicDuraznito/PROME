@@ -63,18 +63,16 @@ const Inicio = () => {
         setCurrentIndex(index);
     };
 
- 
-
     return (
         <>
-            <div className="relative w-full max-w-full mx-auto h-screen pt-10 overflow-hidden flex flex-col items-center">
+            <div className="relative w-full max-w-7xl mx-auto h-screen pt-10 overflow-hidden flex flex-col items-center">
                 <div className="relative w-full h-full py-10">
                     {images.map((img, index) => (
                         <motion.img
                             key={index}
                             src={img}
                             alt={`slide-${index}`}
-                            className="absolute inset-0 w-full h-full object-contain" // Cambiado de object-cover a object-contain
+                            className="absolute inset-0 w-full h-full object-cover"
                             initial={{ opacity: 0 }}
                             animate={{
                                 opacity: index === currentIndex ? 1 : 0,
@@ -83,22 +81,24 @@ const Inicio = () => {
                             exit={{ opacity: 0 }}
                         />
                     ))}
-    
+
                     {/* Dots de navegación */}
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                         {images.map((_, index) => (
                             <button
                                 key={index}
                                 onClick={() => goToSlide(index)}
-                                className={`w-3 h-3 rounded-full ${index === currentIndex ? 'bg-white' : 'bg-gray-400'
-                                    }`}
+                                className={`w-3 h-3 rounded-full ${
+                                    index === currentIndex ? 'bg-white' : 'bg-gray-400'
+                                }`}
                                 style={{ transition: 'background-color 0.3s ease' }}
                             ></button>
                         ))}
                     </div>
                 </div>
             </div>
-   
+ 
+  
     
     
 
@@ -297,7 +297,7 @@ const Inicio = () => {
               </div>
           </div>
       </section>
-      <section className="bg-gray-100 py-12">
+      <section className=" py-12">
         <div className="container mx-auto px-4">
             <h1 className="text-4xl font-semibold text-black text-center mb-10">INSTITUCIONES ALIADAS</h1>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-items-center py-9">

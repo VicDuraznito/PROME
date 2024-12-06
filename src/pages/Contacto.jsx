@@ -14,7 +14,7 @@ const Contacto = () => {
         nombre: '',
         email: '',
         telefono: '',
-        message: '',
+        mensaje: '',
     });
 
     const handleChange = (e) => {
@@ -27,7 +27,7 @@ const Contacto = () => {
         try {
             await axios.post('http://localhost:5000/api/contacto', formData);
             alert('Formulario enviado correctamente');
-            setFormData({ nombre: '', email: '', telefono: '', message: ''});
+            setFormData({ nombre: '', email: '', telefono: '', mensaje: ''});
         } catch (error) {
             console.error('Error al enviar el formulario:', error);
             alert('Hubo un problema al enviar el formulario');

@@ -30,6 +30,7 @@
     "prop-types": "^15.8.1",
     "react": "18.2",
     "react-dom": "18.2",
+    "react-icons": "^5.4.0",
     "react-router-dom": "^6.27.0",
     "react-router-hash-link": "^2.4.3",
     "sqlite3": "^5.1.7",

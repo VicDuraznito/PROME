@@ -1,57 +1,22 @@
 [
   {
-    "nombre": "Yosafat",
-    "email": "correo@gmail.com",
-    "telefono": "1234423423",
-    "fecha": "2024-11-26T03:59:13.995Z"
+    "nombre": "Juan Pérez",
+    "email": "juan.perez@example.com",
+    "telefono": "1234567890",
+    "mensaje": "Hola, tengo una consulta",
+    "fecha": "2024-12-06T10:00:00.000Z"
   },
   {
-    "nombre": "El yos",
-    "email": "elcorrreo@yosmail.yos",
-    "telefono": "2131234",
-    "fecha": "2024-11-27T03:07:21.646Z"
-  },
-  {
-    "nombre": "fhfhgfhg",
-    "email": "admin@escuela.com",
-    "telefono": "12132132",
-    "fecha": "2024-11-29T20:12:10.247Z"
-  },
-  {
-    "nombre": "prueba",
-    "email": "prueba@gmail.com",
-    "telefono": "111",
-    "fecha": "2024-12-06T06:05:59.182Z"
+    "nombre": "Ana Gómez",
+    "email": "ana.gomez@example.com",
+    "telefono": "0987654321",
+    "mensaje": "Me gustaría más información",
+    "fecha": "2024-12-06T10:30:00.000Z"
   },
   {
     "nombre": "prueba2",
     "email": "prueba2@gmail.com",
     "telefono": "111",
-    "fecha": "2024-12-06T06:15:35.970Z"
-  },
-  {
-    "nombre": "prueba2",
-    "email": "prueba2@gmail.com",
-    "telefono": "111",
-    "fecha": "2024-12-06T06:19:49.013Z"
-  },
-  {
-    "nombre": "prueba2",
-    "email": "prueba2@gmail.com",
-    "telefono": "111",
-    "fecha": "2024-12-06T06:21:53.948Z"
-  },
-  {
-    "nombre": "prueba2",
-    "email": "admin@escuela.com",
-    "telefono": "111",
-    "mensaje": "",
-    "fecha": "2024-12-06T06:23:10.736Z"
-  },
-  {
-    "nombre": "prueba2",
-    "email": "prueba2@gmail.com",
-    "telefono": "111",
-    "fecha": "2024-12-06T06:46:17.308Z"
+    "fecha": "2024-12-06T10:07:02.774Z"
   }
 ]
