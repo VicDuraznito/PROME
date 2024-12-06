@@ -6,7 +6,7 @@ import img1 from '../assets/Imagen3.png';
 
 import presco from '../assets/prescolar3.JPG';
 
-import alum from '../assets/prepa3.jpg';
+import alumnos from '../assets/preparatoria3.JPG';
 import sec from '../assets/secu2.jpg';
 import prim from '../assets/prima.jpg';
 
@@ -178,7 +178,7 @@ const Inicio = () => {
           >
             <div className="aspect-w-4 aspect-h-3">
               <img 
-                src={alum} 
+                src={alumnos} 
                 alt="preparatoria" 
                 className="object-cover object-center w-full h-full"
               />
