@@ -4,7 +4,7 @@ import img3 from '../assets/Imagen4.png';
 import img2 from '../assets/Imagen2.png';
 import img1 from '../assets/Imagen3.png';
 
-import presco from '../assets/presco3.jpg';
+import presco from '../assets/prescolar3.JPG';
 
 import alum from '../assets/prepa3.jpg';
 import sec from '../assets/secu2.jpg';
