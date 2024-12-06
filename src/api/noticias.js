@@ -49,4 +49,5 @@ router.get('/noticias', (req, res) => {
     });
 });
 
+router.put
 export default router;
