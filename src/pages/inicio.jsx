@@ -8,7 +8,7 @@ import presco from "../assets/prescolar3.JPG";
 
 import alumnos from "../assets/preparatoria3.JPG";
 import secundaria from "../assets/seec.JPG";
-import prim from "../assets/prima.jpg";
+import prim from "../assets/prima.JPG";
 
 
 
