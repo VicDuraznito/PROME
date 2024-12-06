@@ -4,7 +4,7 @@ import img3 from '../assets/Imagen4.png';
 import img2 from '../assets/Imagen2.png';
 import img1 from '../assets/Imagen3.png';
 
-import pres from '../assets/presco3.jpg';
+import presco from '../assets/presco3.jpg';
 
 import alum from '../assets/prepa3.jpg';
 import sec from '../assets/secu2.jpg';
@@ -121,7 +121,7 @@ const Inicio = () => {
           >
             <div className="aspect-w-4 aspect-h-3">
               <img 
-                src={pres} 
+                src={presco} 
                 alt="preescolar" 
                 className="object-cover object-center w-full h-full"
               />
