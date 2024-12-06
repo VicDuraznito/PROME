@@ -21,7 +21,7 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Inicio />} />
-                <Route path="/PROME" element={<Inicio />} />
+                
                 <Route path="/preescolar" element={<Preescolar />} />
                 <Route path="/primaria" element={<Primaria />} />
                 <Route path="/secundaria" element={<Secundaria />} />
