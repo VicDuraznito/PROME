@@ -15,13 +15,10 @@ import Chatbot from "./chatbot/Chatbot";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 
-
-
 function App() {
     return (
         <div className="nav">
             <Navbar />
-            {/* <ScrollToTop /> */}
             <Routes>
                 <Route path="/" element={<Inicio />} />
                 <Route path="/PROME" element={<Inicio />} />
