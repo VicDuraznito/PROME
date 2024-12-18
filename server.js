@@ -23,6 +23,9 @@ app.use('/uploads', express.static('uploads')); // Servir archivos subidos está
 
 // Servir archivos estáticos desde la carpeta dist (donde Vite coloca los archivos de producción)
 app.use(express.static(path.join(__dirname, 'dist')));
+// Servir archivos estáticos desde la carpeta public
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Middleware para parsear datos de formulario (multipart para imágenes)
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -93,6 +96,7 @@ app.use((err, req, res, next) => {
 });
 
 // Arrancar el servidor
-app.listen(5000, () => {
-    console.log('Servidor ejecutándose en http://localhost:5000');
+const PORT = process.env.PORT || 5000; // Asegura que tome el puerto de Railway
+app.listen(PORT, () => {
+    console.log(`Servidor ejecutándose en el puerto ${PORT}`);
 });
