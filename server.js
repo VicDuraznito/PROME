@@ -21,6 +21,9 @@ app.use(cors());  // Permitir solicitudes CORS
 app.use(express.json());  // Usar express.json() para manejar JSON
 app.use('/uploads', express.static('uploads')); // Servir archivos subidos estáticamente
 
+// Servir archivos estáticos desde la carpeta dist (donde Vite coloca los archivos de producción)
+app.use(express.static(path.join(__dirname, 'dist')));
+
 // Middleware para parsear datos de formulario (multipart para imágenes)
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
