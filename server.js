@@ -10,6 +10,14 @@ import fs from 'fs';  // Agregar fs
 import path from 'path';  // Agregar path
 import { fileURLToPath } from 'url';
 
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception:', err);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
 // Define manualmente __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
