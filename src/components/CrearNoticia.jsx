@@ -7,7 +7,7 @@ function CrearNoticia() {
     const [imagenUrl, setImagenUrl] = useState('');
     
     // Obtiene la URL de la API desde la variable de entorno
-    const API_URL = process.env.REACT_APP_API_URL || 'https://prome-production.up.railway.app/api';
+    const API_URL = process.env.REACT_APP_API_URL || 'https://promedac.up.railway.app/api';
 
     const handleSubmit = async (e) => {
         e.preventDefault();

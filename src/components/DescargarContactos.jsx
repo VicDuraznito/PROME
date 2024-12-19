@@ -5,7 +5,7 @@ const DescargarContactos = () => {
     const [error, setError] = useState('');
 
     // Obtiene la URL base desde la variable de entorno o usa la predeterminada
-    const API_URL = process.env.REACT_APP_API_URL || 'https://prome-production.up.railway.app';
+    const API_URL = process.env.REACT_APP_API_URL || 'https://promedac.up.railway.app';
 
     const descargarExcel = () => {
         setLoading(true); // Inicia la carga
