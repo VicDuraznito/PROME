@@ -5,6 +5,9 @@ function CrearNoticia() {
     const [descripcion, setDescripcion] = useState('');
     const [imagen, setImagen] = useState(null);
     const [imagenUrl, setImagenUrl] = useState('');
+    
+    // Obtiene la URL de la API desde la variable de entorno
+    const API_URL = process.env.REACT_APP_API_URL || 'https://prome-production.up.railway.app/api';
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,7 +20,7 @@ function CrearNoticia() {
         }
     
         try {
-            const response = await fetch('http://localhost:5000/api/noticias', {
+            const response = await fetch(`${API_URL}/noticias`, {
                 method: 'POST',
                 body: formData,
             });

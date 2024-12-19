@@ -4,11 +4,14 @@ const DescargarContactos = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
+    // Obtiene la URL base desde la variable de entorno o usa la predeterminada
+    const API_URL = process.env.REACT_APP_API_URL || 'https://prome-production.up.railway.app';
+
     const descargarExcel = () => {
         setLoading(true); // Inicia la carga
         setError(''); // Resetea los errores
 
-        fetch('http://localhost:5000/api/exportar-contactos', {
+        fetch(`${API_URL}/api/exportar-contactos`, {
             method: 'GET',
         })
         .then((response) => {

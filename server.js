@@ -104,7 +104,7 @@ app.use((err, req, res, next) => {
 });
 
 // Arrancar el servidor
-const PORT = process.env.PORT || 5000; // Asegura que tome el puerto de Railway
+const PORT = process.env.PORT || 8080; // Asegura que tome el puerto de Railway
 app.listen(PORT, () => {
     console.log(`Servidor ejecutándose en el puerto ${PORT}`);
 });

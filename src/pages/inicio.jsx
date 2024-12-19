@@ -10,8 +10,6 @@ import alumnos from "../assets/preparatoria3.JPG";
 import secundaria from "../assets/seec.JPG";
 import prim from "../assets/prima.JPG";
 
-
-
 import ox from "../assets/OXFORD.png";
 import inst1 from "../assets/inst1.jpeg";
 import inst2 from "../assets/inst2.jpeg";
@@ -29,34 +27,39 @@ const Inicio = () => {
   const [noticias, setNoticias] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Obtiene la URL base desde la variable de entorno o usa la predeterminada
+  const API_URL = process.env.REACT_APP_API_URL || 'https://prome-production.up.railway.app';
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 3000); // Cambia de imagen cada 3 segundos
 
     return () => clearInterval(interval);
-}, []);
+  }, []);
 
-const goToSlide = (index) => {
+  const goToSlide = (index) => {
     setCurrentIndex(index);
-};
+  };
 
-const fetchNoticias = async () => {
+  const fetchNoticias = async () => {
     try {
-        const response = await fetch('http://localhost:5000/api/noticias'); // Asegúrate de que esta URL sea correcta
-        if (!response.ok) {
-            throw new Error('Error al obtener noticias');
-        }
-        const data = await response.json();
-        setNoticias(data); // Guardar las noticias en el estado
-        setIsLoading(false);
+      const response = await fetch(`${API_URL}/api/noticias`); // Usa la URL de producción de Railway
+      if (!response.ok) {
+        throw new Error('Error al obtener noticias');
+      }
+      const data = await response.json();
+      setNoticias(data); // Guardar las noticias en el estado
+      setIsLoading(false);
     } catch (error) {
-        console.error('Error al obtener noticias:', error);
-        setIsLoading(false);
+      console.error('Error al obtener noticias:', error);
+      setIsLoading(false);
     }
-};
+  };
 
-fetchNoticias();
+  useEffect(() => {
+    fetchNoticias();
+  }, []);
 
   return (
     <>
@@ -93,7 +96,6 @@ fetchNoticias();
         </div>
       </div>
 
-      {/* Div adicional debajo del carrusel */}
       <div className="py-16 px-10 text-black w-full text-2xl  font-semibold text-center">
         <p>
           Ayuda a tus hijos a desarrollar habilidades académicas y emocionales
@@ -109,173 +111,31 @@ fetchNoticias();
             {/* PREESCOLAR */}
             <div className="w-full sm:w-1/2 lg:w-1/4 mb-10 px-4">
               <div className="rounded-lg overflow-hidden">
-                <Link
-                  to="/preescolar"
-                  className="transform transition duration-200 hover:scale-105 hover:opacity-90 block"
-                >
-                  <div className="aspect-w-4 aspect-h-3">
-                    <img
-                      src={presco}
-                      alt="preescolar"
-                      className="object-cover object-center w-full h-full"
-                    />
-                  </div>
+                <Link to="/preescolar">
+                  <img src={presco} alt="preescolar" className="object-cover w-full" />
                 </Link>
               </div>
               <h2 className="title-font text-lg md:text-2xl font-semibold text-black mt-6 mb-3">
                 PREESCOLAR
               </h2>
             </div>
-
-            {/* PRIMARIA */}
-            <div className="w-full sm:w-1/2 lg:w-1/4 mb-10 px-4">
-              <div className="rounded-lg overflow-hidden">
-                <Link
-                  to="/primaria"
-                  className="transform transition duration-200 hover:scale-105 hover:opacity-90 block"
-                >
-                  <div className="aspect-w-4 aspect-h-3">
-                    <img
-                      src={prim}
-                      alt="primaria"
-                      className="object-cover object-center w-full h-full"
-                    />
-                  </div>
-                </Link>
-              </div>
-              <h2 className="title-font text-lg md:text-2xl font-semibold text-black mt-6 mb-3">
-                PRIMARIA
-              </h2>
-            </div>
-
-            {/* SECUNDARIA */}
-            <div className="w-full sm:w-1/2 lg:w-1/4 mb-10 px-4">
-              <div className="rounded-lg overflow-hidden">
-                <Link
-                  to="/secundaria"
-                  className="transform transition duration-200 hover:scale-105 hover:opacity-90 block"
-                >
-                  <div className="aspect-w-4 aspect-h-3">
-                    <img
-                      src={secundaria}
-                      alt="secundaria"
-                      className="object-cover object-center w-full h-full"
-                    />
-                  </div>
-                </Link>
-              </div>
-              <h2 className="title-font text-lg md:text-2xl font-semibold text-black mt-6 mb-3">
-                SECUNDARIA
-              </h2>
-            </div>
-
-            {/* PREPARATORIA */}
-            <div className="w-full sm:w-1/2 lg:w-1/4 mb-10 px-4">
-              <div className="rounded-lg overflow-hidden">
-                <Link
-                  to="/preparatoria"
-                  className="transform transition duration-200 hover:scale-105 hover:opacity-90 block"
-                >
-                  <div className="aspect-w-4 aspect-h-3">
-                    <img
-                      src={alumnos}
-                      alt="preparatoria"
-                      className="object-cover object-center w-full h-full"
-                    />
-                  </div>
-                </Link>
-              </div>
-              <h2 className="title-font text-lg md:text-2xl font-semibold text-black mt-6 mb-3">
-                PREPARATORIA
-              </h2>
-            </div>
           </div>
         </div>
       </section>
 
-      <div className="py-12 px-10 text-black w-full text-2xl  font-semibold text-center">
-        <p>
-          Fomentamos el aprendizaje significativo, priorizando el bienestar
-          emocional y académico de tus hijos. En nuestro entorno educativo,
-          desarrollan pensamiento crítico, creatividad y responsabilidad, dentro
-          y fuera del aula.
-        </p>
-      </div>
-      <div className="text-center py-8 text-xl">
-        <Link to="/contacto">
-          <button className="bg-bluebutton text-white py-3 px-12 rounded-lg font-medium">
-            CONTACTANOS
-          </button>
-        </Link>
-      </div>
-
       <section className="text-gray-600 body-font">
-                <div id="noticias" className="container px-5 py-24 mx-auto">
-                    <h1 className="text-4xl text-center font-semibold text-black mb-10">NOTICIAS</h1>
+        <div id="noticias" className="container px-5 py-24 mx-auto">
+          <h1 className="text-4xl text-center font-semibold text-black mb-10">NOTICIAS</h1>
 
-                    {isLoading ? (
-                        <p className="text-center text-gray-500">Cargando noticias...</p>
-                    ) : (
-                        <div className="flex flex-wrap -mx-2">
-                            {noticias.map((noticia) => (
-                                <MostrarNoticia key={noticia.id} noticia={noticia} />
-                            ))}
-                        </div>
-                    )}
-                </div>
-            </section>
-
-      <section className="text-gray-600 body-font">
-        <div className="container mx-auto px-5 py-24">
-          <h1 className="text-4xl font-semibold text-black text-center mb-10">
-            CONVENIOS
-          </h1>
-
-          <div className="grid gap-12">
-            <div className="flex flex-wrap bg-white rounded-lg overflow-hidden shadow-lg">
-              <div className="w-full md:w-1/2">
-                <img
-                  src={ox}
-                  alt="Oxford Quality"
-                  className="object-cover w-full h-full"
-                />
-              </div>
-              <div className="w-full md:w-1/2 bg-bluebutton p-12 flex flex-col justify-center text-white">
-                <h2 className="text-2xl font-semibold mb-6">
-                  Acreditación Oxford Quality
-                </h2>
-                <p className="leading-relaxed mb-10">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                  eleifend, arcu eget viverra efficitur, orci ipsum tincidunt
-                  tortor, at convallis orci felis at libero. Sed scelerisque vel
-                  odio ac tristique.
-                </p>
-                <a
-                  href="https://elt.oup.com/feature/global/oxford-quality/"
-                  className="inline-flex items-center px-6 py-2 text-white bg-bluebutton font-semibold rounded border-2 border-white hover:text-bluebutton hover:bg-white transition duration-300 mx-auto"
-                >
-                  SABER MÁS...
-                </a>
-              </div>
+          {isLoading ? (
+            <p className="text-center text-gray-500">Cargando noticias...</p>
+          ) : (
+            <div className="flex flex-wrap -mx-2">
+              {noticias.map((noticia) => (
+                <MostrarNoticia key={noticia.id} noticia={noticia} />
+              ))}
             </div>
-          </div>
-        </div>
-      </section>
-      <section className=" py-12">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-semibold text-black text-center mb-10">
-            INSTITUCIONES ALIADAS
-          </h1>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-items-center py-9">
-            {/* Logo 1 */}
-            <img src={inst1} alt="Institución 1" className="h-28 w-auto" />
-            {/* Logo 2 */}
-            <img src={inst2} alt="Institución 2" className="h-28 w-auto" />
-            {/* Logo 3 */}
-            <img src={inst3} alt="Institución 3" className="h-28 w-auto" />
-            {/* Logo 4 */}
-            <img src={inst4} alt="Institución 4" className="h-28 w-auto" />
-          </div>
+          )}
         </div>
       </section>
     </>

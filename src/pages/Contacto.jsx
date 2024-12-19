@@ -7,8 +7,6 @@ import whats from '../assets/whatsapp.png'
 import mail from '../assets/email.png'
 import axios from 'axios';
 
-
-
 const Contacto = () => {
     const [formData, setFormData] = useState({
         nombre: '',
@@ -16,6 +14,9 @@ const Contacto = () => {
         telefono: '',
         mensaje: '',
     });
+
+    // Obtiene la URL base desde la variable de entorno o usa la predeterminada
+    const API_URL = process.env.REACT_APP_API_URL || 'https://prome-production.up.railway.app';
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -25,7 +26,7 @@ const Contacto = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/contacto', formData);
+            await axios.post(`${API_URL}/api/contacto`, formData);
             alert('Formulario enviado correctamente');
             setFormData({ nombre: '', email: '', telefono: '', mensaje: ''});
         } catch (error) {
@@ -107,7 +108,7 @@ const Contacto = () => {
                             <label htmlFor="message" className="leading-7 text-base text-gray-800">Mensaje</label>
                             <textarea
                                 id="mensaje"
-                                name="mensaje" // Cambiado a "mensaje"
+                                name="mensaje" 
                                 value={formData.mensaje}
                                 onChange={handleChange}
                                 className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
@@ -127,60 +128,6 @@ const Contacto = () => {
         </div>
 
         </motion.section>
-
-        <section className="text-gray-600 body-font relative mt-28">
-            <div className="container px-5 py-24 mx-auto flex sm:flex-nowrap flex-wrap">
-                <div className="lg:w-2/3 md:w-1/2 bg-gray-300 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
-                <iframe
-                    width="100%"
-                    height="100%"
-                    className="absolute inset-0"
-                    frameBorder="0"
-                    title="map"
-                    marginHeight="0"
-                    marginWidth="0"
-                    scrolling="no"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d270.82229968449514!2d-104.6261575185623!3d24.04037252613803!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x869bb7b075c48207%3A0x7cfd698afa99a632!2spromedac!5e0!3m2!1ses!2smx!4v1730903463046!5m2!1ses!2smx"
-                ></iframe>
-
-                  
-                </div>
-            
-               
-
-                <div className="lg:w-1/3 md:w-1/2 w-full bg-white flex flex-col md:ml-auto md:py-8 py-4 mt-8 md:mt-0">
-                    <h2 className="text-black text-3xl sm:text-4xl mb-4 font-medium title-font pb-6 sm:pb-14">
-                        VISÍTANOS
-                    </h2>
-
-                    <div className="flex items-center my-4 sm:my-7">
-                        <img src={pin} alt="Location pin" className="w-6 h-6 mr-3" />
-                        <label htmlFor="address" className="text-base sm:text-lg text-black">
-                            Cartagena 116, Guadalupe, 34220 Durango, Dgo.
-                        </label>
-                    </div>
-
-                    <div className="flex items-center my-4 sm:my-7">
-                        <img src={phone} alt="Phone icon" className="w-6 h-6 mr-3" />
-                        <label htmlFor="phone" className="text-base sm:text-lg text-black">618 818 4002</label>
-                    </div>
-
-                    <div className="flex items-center my-4 sm:my-7">
-                        <img src={whats} alt="WhatsApp icon" className="w-6 h-6 mr-3" />
-                        <label htmlFor="whatsapp" className="text-base sm:text-lg text-black">618 299 76 42</label>
-                    </div>
-
-                    <div className="flex items-center my-4 sm:my-7">
-                        <img src={mail} alt="Email icon" className="w-6 h-6 mr-3" />
-                        <label htmlFor="email" className="text-base sm:text-lg text-black">promedac@gmail.com</label>
-                    </div>
-                </div>
-
-
-            </div>
-        </section>
-
-
         </>
     );
 };

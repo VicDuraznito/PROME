@@ -5,27 +5,34 @@ function Login() {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+    // Obtiene la URL de la API desde la variable de entorno
+    const API_URL = process.env.REACT_APP_API_URL || 'https://prome-production.up.railway.app/api';
+
     const handleLogin = async (event) => {
         event.preventDefault();
 
-        // Enviar las credenciales al backend
-        const response = await fetch('http://localhost:5000/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-        });
-        
-        const data = await response.json();
-        console.log(data);  // Verifica la respuesta
-        
-        if (response.ok) {
-            // Redirigir o mostrar un mensaje de éxito
-            window.location.href = '/admin';  // Redirige a la página del admin, por ejemplo
-        } else {
-            // Mostrar el mensaje de error
-            setErrorMessage(data.message || 'Error al iniciar sesión');
+        try {
+            const response = await fetch(`${API_URL}/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+            console.log('Respuesta del servidor:', data); // Verifica la respuesta
+            
+            if (response.ok) {
+                // Redirigir o mostrar un mensaje de éxito
+                window.location.href = '/admin';  // Redirige a la página del admin
+            } else {
+                // Mostrar el mensaje de error
+                setErrorMessage(data.message || 'Error al iniciar sesión');
+            }
+        } catch (error) {
+            console.error('Error al iniciar sesión:', error);
+            setErrorMessage('Error de conexión. Intenta de nuevo más tarde.');
         }
     };
 
