@@ -1,5 +1,10 @@
 import sqlite3 from 'sqlite3';
-import path from 'path';  // Usa 'path' para gestionar rutas de archivos
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Obtener la ruta del directorio actual
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Define la ruta a la base de datos
 const dbPath = path.join(__dirname, 'database.sqlite');
