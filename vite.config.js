@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   base: '/', // Configura la base si tu proyecto está en una subcarpeta de GitHub Pages
-  assetsInclude: ['**/*.JPG', '**/*.jpg']
+  assetsInclude: ['**/*.JPG', '**/*.jpg', '**/*.png', '**/*.gif', '**/*.svg']
 });
 
 
