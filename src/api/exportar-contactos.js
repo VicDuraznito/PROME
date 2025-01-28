@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.get('/api/exportar-contactos', (req, res) => {
-    const db = new sqlite3.Database('./database.sqlite', (err) => {
+    const db = new sqlite3.Database('../../database.sqlite', (err) => {
         if (err) {
             console.error('Error al conectar con SQLite:', err.message);
             res.status(500).send('Error al conectar a la base de datos');
