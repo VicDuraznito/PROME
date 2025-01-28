@@ -1,5 +1,5 @@
 import sqlite3 from 'sqlite3';
-
+import path from './database.sqlite'
 // Conectar o crear la base de datos
 
 
