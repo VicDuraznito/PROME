@@ -90,7 +90,7 @@ app.use((err, req, res, next) => {
 });
 
 // Arrancar el servidor
-const port = process.env.PORT || 5000; // Usa el puerto proporcionado por Railway o 5000 si no está definido
+const port = process.env.PORT || 8080; // Usa el puerto proporcionado por Railway o 5000 si no está definido
 app.listen(port, () => {
     console.log(`Servidor ejecutándose en http://localhost:${port}`);
 });
