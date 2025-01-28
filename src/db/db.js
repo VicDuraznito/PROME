@@ -1,17 +1,17 @@
 import sqlite3 from 'sqlite3';
-import path from './database.sqlite'
+import path from 'path';  // Usa 'path' para gestionar rutas de archivos
+
+// Define la ruta a la base de datos
+const dbPath = path.join(__dirname, 'database.sqlite');
+
 // Conectar o crear la base de datos
-
-
-
-const db = new sqlite3.Database(path.join(__dirname, 'database.sqlite'), (err) => {
+const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
         console.error('Error al conectar con SQLite:', err.message);
     } else {
         console.log('Conectado a la base de datos SQLite.');
     }
 });
-
 
 // Crear tablas (si no existen)
 db.serialize(() => {
