@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Define la ruta a la base de datos
-const dbPath = path.join(__dirname, 'database.sqlite');
+const dbPath = path.join(__dirname, '../../database.sqlite');
 
 // Conectar o crear la base de datos
 const db = new sqlite3.Database(dbPath, (err) => {
