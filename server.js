@@ -91,12 +91,13 @@ app.get('/', (req, res) => {
 
 // Manejo de errores generales
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Algo salió mal!');
+    console.error('Error detectado:', err.stack || err.message);
+    res.status(500).send('Ocurrió un error inesperado!');
 });
 
 // Arrancar el servidor
-const port = process.env.PORT || 5000; // Usar el puerto proporcionado por Railway o 5000 como predeterminado
+const port = process.env.PORT || 5000; 
 app.listen(port, () => {
     console.log(`Servidor ejecutándose en el puerto ${port}`);
 });
+
