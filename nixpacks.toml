@@ -1,9 +1,5 @@
-# nixpacks.toml
-[phases.setup]
-nixPkgs = ["caddy"]
-
 [phases.build]
 cmds = ["npm install", "npm run build"]
 
 [phases.start]
-cmds = ["caddy run --config /app/Caddyfile"]
+cmds = ["npm run preview"]
