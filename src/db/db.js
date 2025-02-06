@@ -7,12 +7,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Define la ruta a la base de datos
-const dbPath = path.join(__dirname, '../../database.sqlite');
+const dbPath = path.join(__dirname, '../../database.sqlite');  // Ruta más flexible a la base de datos
 
-// Conectar o crear la base de datos
+// Conectar a la base de datos utilizando dbPath
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
         console.error('Error al conectar con SQLite:', err.message);
+        process.exit(1); // Detiene el proceso si no se puede conectar
     } else {
         console.log('Conectado a la base de datos SQLite.');
     }
