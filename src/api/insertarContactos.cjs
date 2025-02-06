@@ -5,7 +5,7 @@ const fs = require('fs'); // Requiere el módulo fs para leer el archivo
 const contactos = JSON.parse(fs.readFileSync('../db/contacts.json', 'utf8'));
 
 // Conectar a la base de datos SQLite
-const db = new sqlite3.Database('../../database.sqlite');
+const db = new sqlite3.Database('../db/database.sqlite');
 
 // Iniciar la inserción de datos
 db.serialize(() => {

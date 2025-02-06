@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Ruta a tu base de datos
-const dbPath = path.resolve(__dirname, '../../database.sqlite');
+const dbPath = path.resolve(__dirname, '../db/database.sqlite');
 console.log("Ruta a la base de datos:", dbPath);
 
 // Crear una nueva instancia de la base de datos SQLite

@@ -39,7 +39,7 @@ app.use('/api', noticiasRoutes); // Rutas de noticias
 // Ruta para exportar contactos a un archivo Excel
 app.get('/api/exportar-contactos', (req, res) => {
     // Ruta absoluta de la base de datos
-    const dbPath = path.join(__dirname, 'database.sqlite');
+    const dbPath = path.join(__dirname, './src/db/database.sqlite');
     const db = new sqlite3.Database(dbPath, (err) => {
         if (err) {
             console.error('Error al conectar con SQLite:', err.message);
