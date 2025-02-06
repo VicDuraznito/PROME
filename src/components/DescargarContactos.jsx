@@ -8,7 +8,7 @@ const DescargarContactos = () => {
         setLoading(true); // Inicia la carga
         setError(''); // Resetea los errores
 
-        fetch('http://localhost:5000/api/exportar-contactos', {
+        fetch('http://localhost:8080/api/exportar-contactos', {
             method: 'GET',
         })
         .then((response) => {

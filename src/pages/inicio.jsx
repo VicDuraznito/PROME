@@ -43,7 +43,7 @@ const goToSlide = (index) => {
 
 const fetchNoticias = async () => {
     try {
-        const response = await fetch('http://localhost:5000/api/noticias'); // Asegúrate de que esta URL sea correcta
+        const response = await fetch('http://localhost:8080/api/noticias'); // Asegúrate de que esta URL sea correcta
         if (!response.ok) {
             throw new Error('Error al obtener noticias');
         }

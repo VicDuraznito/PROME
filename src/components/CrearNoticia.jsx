@@ -17,7 +17,7 @@ function CrearNoticia() {
         }
     
         try {
-            const response = await fetch('http://localhost:5000/api/noticias', {
+            const response = await fetch('http://localhost:8080/api/noticias', {
                 method: 'POST',
                 body: formData,
             });

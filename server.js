@@ -96,7 +96,7 @@ app.use((err, req, res, next) => {
 });
 
 // Arrancar el servidor
-const port = process.env.PORT || 5000; 
+const port = process.env.PORT || 8080; 
 app.listen(port, () => {
     console.log(`Servidor ejecutándose en el puerto ${port}`);
 });
