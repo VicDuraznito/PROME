@@ -37,3 +37,6 @@ const requestHandler = async (req, res) => {
 http.createServer(requestHandler).listen(3000, () => {
   console.log('Servidor de base de datos Neon ejecutándose en el puerto 3000');
 });
+
+
+export { sql };

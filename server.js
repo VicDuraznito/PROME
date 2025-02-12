@@ -9,7 +9,9 @@ import * as XLSX from 'xlsx';  // Agregar XLSX
 import fs from 'fs';  // Agregar fs
 import path from 'path';  // Agregar path
 import { fileURLToPath } from 'url';
-import sql from './dbserver.js'; // Importa la conexión desde dbserver.js
+ // Importa la conexión desde dbserver.js
+import { sql } from './dbserver.js';  // Importa la conexión con la base de datos
+import http from 'http';  // Asegúrate de importar http si lo usas
 
 // Define manualmente __dirname
 const __filename = fileURLToPath(import.meta.url);
