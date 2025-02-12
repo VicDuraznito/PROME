@@ -1,6 +1,7 @@
 import express from 'express';
 import multer from 'multer';
-import { Client } from 'pg'; // Usamos PostgreSQL en lugar de SQLite
+import pg from 'pg'; // Importa todo el módulo
+const { Client } = pg; // Extrae Client de pg
 
 const router = express.Router();
 

@@ -1,6 +1,10 @@
 const { Client } = require('pg'); // Requiere el cliente de PostgreSQL
 const fs = require('fs'); // Requiere el módulo fs para leer el archivo
 
+
+import pg from 'pg'; // Importa todo el módulo
+const { Client } = pg; // Extrae Client de pg
+
 // Lee el archivo JSON
 const contactos = JSON.parse(fs.readFileSync('../db/contacts.json', 'utf8'));
 

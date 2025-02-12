@@ -1,8 +1,12 @@
-import { Client } from 'pg'; // Importamos el cliente de PostgreSQL
-import path from 'path';
+
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import XLSX from 'xlsx';
+
+
+import pg from 'pg'; // Importa todo el módulo
+const { Client } = pg; // Extrae Client de pg
+
 
 // Configuración de la base de datos PostgreSQL usando la variable de entorno DATABASE_URL
 const client = new Client({

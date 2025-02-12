@@ -1,4 +1,6 @@
-import { Client } from 'pg'; // Importamos el cliente de PostgreSQL
+import pkg from 'pg';
+const { Client } = pkg;
+
 
 // Configuración de la base de datos PostgreSQL usando la variable de entorno DATABASE_URL
 const client = new Client({

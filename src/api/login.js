@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
-import { Client } from 'pg'; // Requiere el cliente de PostgreSQL
+
+import pg from 'pg'; // Importa todo el módulo
+const { Client } = pg; // Extrae Client de pg
 
 const router = Router();
 
