@@ -9,20 +9,29 @@ const sql = neon(process.env.DATABASE_URL);
 
 // Crear el manejador de la solicitud
 const requestHandler = async (req, res) => {
-  try {
-    // Hacer una consulta simple para obtener la versión de la base de datos
-    const result = await sql`SELECT version()`;
-    const { version } = result[0];
-
-    // Enviar la respuesta con la versión de la base de datos
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end(version);
-  } catch (error) {
-    // Manejar cualquier error durante la conexión o consulta
-    res.writeHead(500, { 'Content-Type': 'text/plain' });
-    res.end('Error al conectar a la base de datos: ' + error.message);
-  }
-};
+    try {
+      // Realizar una consulta para obtener los datos de las tablas
+      const contactos = await sql`SELECT * FROM contactos`;
+      const admin = await sql`SELECT * FROM admin`;
+      const noticias = await sql`SELECT * FROM noticias`;
+  
+      // Preparar los datos para la respuesta
+      const responseData = {
+        contactos,
+        admin,
+        noticias
+      };
+  
+      // Enviar los datos como respuesta en formato JSON
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(responseData));
+    } catch (error) {
+      // Manejar cualquier error durante la conexión o consulta
+      res.writeHead(500, { 'Content-Type': 'text/plain' });
+      res.end('Error al conectar a la base de datos: ' + error.message);
+    }
+  };
+  
 
 // Crear el servidor HTTP y escuchando en el puerto 3000
 http.createServer(requestHandler).listen(3000, () => {

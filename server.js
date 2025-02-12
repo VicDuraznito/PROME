@@ -9,33 +9,13 @@ import * as XLSX from 'xlsx';  // Agregar XLSX
 import fs from 'fs';  // Agregar fs
 import path from 'path';  // Agregar path
 import { fileURLToPath } from 'url';
-import pkg from 'pg'; 
-
-const { Client } = pkg;
+import sql from './dbserver.js'; // Importa la conexión desde dbserver.js
 
 // Define manualmente __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-
-// Configuración de la base de datos PostgreSQL
-const client = new Client({
-    user: 'neondb_owner',        // Reemplaza con tu usuario de PostgreSQL
-    host: 'ep-lingering-mode-a4mkydha-pooler.us-east-1.aws.neon.tech',           // Reemplaza con el host de tu base de datos
-    database: 'neondb', // Reemplaza con el nombre de tu base de datos
-    password: 'npg_1ZxWsDid2tlF', // Reemplaza con tu contraseña
-    port: 5432,                // Puerto por defecto
-    //ssl: false                 // Desactiva SSL si no lo necesitas
-});
-
-client.connect((err) => {
-    if (err) {
-        console.error('Error al conectar con la base de datos PostgreSQL:', err.stack);
-    } else {
-        console.log('Conectado a la base de datos PostgreSQL');
-    }
-});
 
 // Middleware
 app.use(cors()); // Permitir solicitudes CORS
@@ -53,13 +33,13 @@ app.use((req, res, next) => {
 });
 
 // Rutas
-app.post('/api/contacto', handleContact); // Endpoint para manejo de contacto
+app.post('/api/contacto', handleContact(sql)); // Usamos la conexión de dbserver.js
 app.use('/api', loginRoutes); // Rutas de login
 app.use('/api', noticiasRoutes); // Rutas de noticias
 
 // Ruta para exportar contactos a un archivo Excel
 app.get('/api/exportar-contactos', (req, res) => {
-    // Ruta absoluta de la base de datos
+    // Ruta absoluta de la base de datos SQLite
     const dbPath = path.join(__dirname, './src/db/dump.sql');
     const db = new sqlite3.Database(dbPath, (err) => {
         if (err) {
@@ -117,7 +97,7 @@ app.use((err, req, res, next) => {
 });
 
 // Arrancar el servidor
-const port = process.env.PORT || 8080; 
+const port = process.env.PORT || 8081; 
 app.listen(port, () => {
     console.log(`Servidor ejecutándose en el puerto ${port}`);
 });
