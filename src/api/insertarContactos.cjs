@@ -1,26 +1,41 @@
-const sqlite3 = require('sqlite3').verbose(); // Requiere el módulo sqlite3
+const { Client } = require('pg'); // Requiere el cliente de PostgreSQL
 const fs = require('fs'); // Requiere el módulo fs para leer el archivo
 
 // Lee el archivo JSON
 const contactos = JSON.parse(fs.readFileSync('../db/contacts.json', 'utf8'));
 
-// Conectar a la base de datos SQLite
-const db = new sqlite3.Database('../db/database.sqlite');
+// Conectar a la base de datos PostgreSQL
+const client = new Client({
+    connectionString: process.env.DATABASE_URL, // Usar la URL de conexión de la base de datos
+    ssl: {
+        rejectUnauthorized: false,
+    },
+});
 
-// Iniciar la inserción de datos
-db.serialize(() => {
-    // Prepara la consulta para insertar los datos
-    const stmt = db.prepare("INSERT INTO contactos (nombre, email, telefono, mensaje) VALUES (?, ?, ?, ?)");
-
-    // Inserta cada contacto en la base de datos
-    contactos.forEach(contacto => {
-        stmt.run(contacto.nombre, contacto.email, contacto.telefono, contacto.mensaje);
+client.connect() // Conectar a la base de datos
+    .then(() => {
+        console.log('Conectado a la base de datos PostgreSQL.');
+        
+        // Iniciar la inserción de datos
+        const query = "INSERT INTO contactos (nombre, email, telefono, mensaje) VALUES ($1, $2, $3, $4)";
+        
+        // Inserta cada contacto en la base de datos
+        contactos.forEach(contacto => {
+            client.query(query, [contacto.nombre, contacto.email, contacto.telefono, contacto.mensaje])
+                .then(() => {
+                    console.log(`Contacto insertado: ${contacto.nombre}`);
+                })
+                .catch(err => {
+                    console.error('Error al insertar el contacto:', err.message);
+                });
+        });
+    })
+    .catch(err => {
+        console.error('Error al conectar con PostgreSQL:', err.message);
+    })
+    .finally(() => {
+        // Cierra la conexión después de insertar todos los contactos
+        client.end(() => {
+            console.log('Conexión cerrada.');
+        });
     });
-
-    stmt.finalize(); // Finaliza la preparación de la consulta
-});
-
-// Cierra la base de datos
-db.close(() => {
-    console.log('Datos insertados correctamente');
-});

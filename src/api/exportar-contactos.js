@@ -1,23 +1,33 @@
-import sqlite3 from 'sqlite3'; 
+import { Client } from 'pg'; // Importamos el cliente de PostgreSQL
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import XLSX from 'xlsx';
+
+// Configuración de la base de datos PostgreSQL usando la variable de entorno DATABASE_URL
+const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false,
+    },
+});
 
 // Define manualmente __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.get('/api/exportar-contactos', (req, res) => {
-    const db = new sqlite3.Database('../db/database.sqlite', (err) => {
+    // Conectar a PostgreSQL
+    client.connect((err) => {
         if (err) {
-            console.error('Error al conectar con SQLite:', err.message);
+            console.error('Error al conectar con la base de datos PostgreSQL:', err.message);
             res.status(500).send('Error al conectar a la base de datos');
             return;
         }
     });
 
-    db.all('SELECT * FROM contactos', [], (err, rows) => {
+    // Realizar la consulta para obtener los contactos
+    client.query('SELECT * FROM contactos', (err, result) => {
         if (err) {
             console.error('Error al recuperar los datos:', err.message);
             res.status(500).json({ error: err.message });
@@ -25,19 +35,19 @@ app.get('/api/exportar-contactos', (req, res) => {
         }
 
         // Verificar si la consulta devuelve datos
-        if (!rows || rows.length === 0) {
+        if (!result.rows || result.rows.length === 0) {
             console.log('No se encontraron datos para exportar');
             return res.status(404).send('No hay contactos en la base de datos');
         }
 
         // Log de los datos obtenidos
-        console.log('Datos obtenidos de la base de datos:', rows);
+        console.log('Datos obtenidos de la base de datos:', result.rows);
 
         const wb = XLSX.utils.book_new();
         const filePath = path.join(__dirname, 'contactos.xlsx');
 
         // Convertir los datos correctamente
-        const sheetData = rows.map(row => ({
+        const sheetData = result.rows.map(row => ({
             nombre: row.nombre,
             email: row.email,
             telefono: row.telefono,

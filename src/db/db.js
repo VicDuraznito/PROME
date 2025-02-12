@@ -1,59 +1,58 @@
-import sqlite3 from 'sqlite3';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import pkg from 'pg';
+const { Pool } = pkg;
 
-// Obtener la ruta del directorio actual
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Define la ruta a la base de datos
-// Usa una ruta relativa para que se ajuste al entorno del contenedor
-const dbPath = path.join(__dirname, 'database.sqlite');
-
-
-// Conectar a la base de datos utilizando dbPath
-const db = new sqlite3.Database(dbPath, (err) => {
-    if (err) {
-        console.error('Error al conectar con SQLite:', err.message);
-        process.exit(1); // Detiene el proceso si no se puede conectar
-    } else {
-        console.log('Conectado a la base de datos SQLite.');
-    }
+// Conexión a PostgreSQL usando la URL proporcionada
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL || 'postgres://neondb_owner:npg_1ZxWsDid2tlF@ep-lingering-mode-a4mkydha-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require', // Utiliza la variable de entorno o la URL por defecto
+  ssl: {
+    rejectUnauthorized: false, // Esto es necesario para PostgreSQL en Vercel
+  },
 });
 
 // Crear tablas (si no existen)
-db.serialize(() => {
-    // Tabla para la información de contacto
-    db.run(`
-        CREATE TABLE IF NOT EXISTS contactos (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nombre TEXT NOT NULL,
-            email TEXT NOT NULL,
-            telefono TEXT NOT NULL,
-            mensaje TEXT NOT NULL,
-            fecha DATETIME DEFAULT CURRENT_TIMESTAMP
-        );
+const createTables = async () => {
+  const client = await pool.connect();
+  try {
+    // Crear tablas
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS contactos (
+        id SERIAL PRIMARY KEY,
+        nombre TEXT NOT NULL,
+        email TEXT NOT NULL,
+        telefono TEXT NOT NULL,
+        mensaje TEXT NOT NULL,
+        fecha TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+      );
     `);
 
-    // Tabla para la cuenta admin
-    db.run(`
-        CREATE TABLE IF NOT EXISTS admin (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            email TEXT UNIQUE NOT NULL,
-            password TEXT NOT NULL
-        );
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS admin (
+        id SERIAL PRIMARY KEY,
+        email TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL
+      );
     `);
 
-    // Tabla para las noticias
-    db.run(`
-        CREATE TABLE IF NOT EXISTS noticias (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            titulo TEXT NOT NULL,
-            descripcion TEXT NOT NULL,
-            imagen TEXT NOT NULL,
-            fecha DATETIME DEFAULT CURRENT_TIMESTAMP
-        );
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS noticias (
+        id SERIAL PRIMARY KEY,
+        titulo TEXT NOT NULL,
+        descripcion TEXT NOT NULL,
+        imagen TEXT NOT NULL,
+        fecha TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+      );
     `);
-});
+    console.log('Tablas creadas o ya existentes en PostgreSQL');
+  } catch (error) {
+    console.error('Error al crear las tablas:', error);
+  } finally {
+    client.release();
+  }
+};
 
-export default db;
+// Llamar a la función para crear las tablas
+createTables();
+
+// Exportar el pool de conexiones para usarlo en otros archivos
+export default pool;
+

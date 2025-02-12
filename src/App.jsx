@@ -19,6 +19,7 @@ function App() {
     return (
         <div className="nav">
             <Navbar />
+            <ScrollToTop />
             <Routes>
                 <Route path="/" element={<Inicio />} />
                 

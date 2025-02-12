@@ -1,21 +1,19 @@
-import sqlite3 from 'sqlite3'; // Importar sqlite3 como un módulo por defecto
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { Client } from 'pg'; // Importamos el cliente de PostgreSQL
 
-// Define manualmente __dirname
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Configuración de la base de datos PostgreSQL usando la variable de entorno DATABASE_URL
+const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false,
+    },
+});
 
-// Ruta a tu base de datos
-const dbPath = path.resolve(__dirname, '../db/database.sqlite');
-console.log("Ruta a la base de datos:", dbPath);
-
-// Crear una nueva instancia de la base de datos SQLite
-const db = new sqlite3.Database(dbPath, (err) => {
+// Conectar a PostgreSQL
+client.connect((err) => {
     if (err) {
-        console.error('Error al conectar con la base de datos:', err.message);
+        console.error('Error al conectar con la base de datos PostgreSQL:', err.message);
     } else {
-        console.log('Conectado a la base de datos SQLite.');
+        console.log('Conectado a la base de datos PostgreSQL.');
     }
 });
 
@@ -37,14 +35,14 @@ export const handleContact = (req, res) => {
             fecha: new Date().toISOString()
         };
 
-        // Inserta los datos en la tabla contactos
+        // Consulta SQL para insertar el contacto en PostgreSQL
         const query = `
             INSERT INTO contactos (nombre, email, telefono, mensaje, fecha)
-            VALUES (?, ?, ?, ?, ?)
+            VALUES ($1, $2, $3, $4, $5)
         `;
         
-        // Ejecutar la consulta
-        db.run(query, [newContact.nombre, newContact.email, newContact.telefono, newContact.mensaje, newContact.fecha], function(err) {
+        // Ejecutar la consulta con los valores proporcionados
+        client.query(query, [newContact.nombre, newContact.email, newContact.telefono, newContact.mensaje, newContact.fecha], (err, result) => {
             if (err) {
                 console.error('Error al insertar el contacto:', err.message);
                 return res.status(500).json({ error: 'Hubo un problema al guardar el contacto' });
